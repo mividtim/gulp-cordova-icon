@@ -36,7 +36,7 @@ module.exports = function (src, options) {
 		// Make sure the destination exists
 		mkdir(dest);
 
-		return pify(fs.copy.bind(fs), Promise)(src, path.join(dest, 'icon.' + mime.extension(mimetype)));
+		return pify(fs.copy.bind(fs), Promise)(path.join(process.env.PWD, '..', src), path.join(dest, 'icon.' + mime.extension(mimetype)));
 	}
 
 	/**
@@ -92,12 +92,10 @@ module.exports = function (src, options) {
 
 		this.push(file);
 
-/*
 		if (!fs.existsSync(src)) {
 			// If the image icon does not exist, throw an error
 			return cb(new gutil.PluginError('gulp-cordova-icon', 'The icon file could not be found.'));
 		}
-*/
 
 		if (!isPNG && !isSVG) {
 			// If the image icon is not a png file, throw an error
